@@ -1,0 +1,8 @@
+.file .image {
+  width: 200px;
+  border-radius: 20px;
+}
+
+.file button {
+  margin-bottom: 30px;
+}
