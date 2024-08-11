@@ -1,71 +1,89 @@
 const files = [
   {
-    name: "Giroflex Vermelho 1",
-    path: "Giroflex Vermelho 1",
-    file: "Giroflex Vermelho 1.zip",
-    image: "giroflex.png"
+    name: "Lightbar 1 - white",
+    path: "lightbars/Lightbar 1 - white",
+    file: "Lightbar 1 - white.zip",
+    image: "lightbar.png"
   },
   {
-    name: "Giroflex Vermelho 2",
-    path: "Giroflex Vermelho 2",
-    file: "Giroflex Vermelho 2.zip",
-    image: "giroflex.png"
+    name: "Lightbar 2 - red round",
+    path: "lightbars/Lightbar 2 - red round",
+    file: "Lightbar 2 - red round.zip",
+    image: "lightbar.png"
   },
   {
-    name: "Giroflex Vermelho 3",
-    path: "Giroflex Vermelho 3",
-    file: "Giroflex Vermelho 3.zip",
-    image: "giroflex.png"
-  },
-  //-----------------------//
-  {
-    name: "giroflex vermelho reto 1",
-    path: "giroflex vermelho reto 1",
-    file: "giroflex vermelho reto 1.zip",
-    image: "giroflex.png"
+    name: "Lightbar 3 - red white round",
+    path: "lightbars/Lightbar 3 - red white round",
+    file: "Lightbar 3 - red white round.zip",
+    image: "lightbar.png"
   },
   {
-    name: "giroflex vermelho curvado 2",
-    path: "giroflex vermelho curvado 2",
-    file: "giroflex vermelho curvado 2.zip",
-    image: "giroflex.png"
+    name: "Lightbar 4 - red white round",
+    path: "lightbars/Lightbar 4 - red white round",
+    file: "Lightbar 4 - red white round.zip",
+    image: "lightbar.png"
   },
   {
-    name: "giroflex vermelho azul reto 1",
-    path: "giroflex vermelho azul reto 1",
-    file: "giroflex vermelho azul reto 1.zip",
-    image: "giroflex.png"
+    name: "Lightbar 5 - red blue",
+    path: "lightbars/Lightbar 5 - red blue",
+    file: "Lightbar 5 - red blue.zip",
+    image: "lightbar.png"
   },
   {
-    name: "giroflex branco curvado 1",
-    path: "giroflex branco curvado 1",
-    file: "giroflex branco curvado 1.zip",
-    image: "giroflex.png"
+    name: "Lightbar 6 - red",
+    path: "lightbars/Lightbar 6 - red",
+    file: "Lightbar 6 - red.zip",
+    image: "lightbar.png"
   },
   {
-    name: "giroflex vermelho curvado 3",
-    path: "giroflex vermelho curvado 3",
-    file: "giroflex vermelho curvado 3.zip",
-    image: "giroflex.png"
+    name: "Lightbar 7 - red",
+    path: "lightbars/Lightbar 7 - red",
+    file: "Lightbar 7 - red.zip",
+    image: "lightbar.png"
   },
   {
-    name: "giroflex vermelho curvado 1",
-    path: "giroflex vermelho curvado 1",
-    file: "giroflex vermelho curvado 1.zip",
-    image: "giroflex.png"
-  },
-  {
-    name: "led 1 carro",
-    path: "led 1 carro",
-    file: "led 1 carro.zip",
+    name: "led car 1",
+    path: "leds/led car 1",
+    file: "led car 1.zip",
     image: "led.png"
   },
   {
-    name: "leds bau moto",
-    path: "leds bau moto",
-    file: "leds bau moto.zip",
+    name: "led car 2",
+    path: "leds/led car 2",
+    file: "led car 2.zip",
     image: "led.png"
   },
+  {
+    name: "led car 3",
+    path: "leds/led car 3",
+    file: "led car 3.zip",
+    image: "led.png"
+  },
+  {
+    name: "led door",
+    path: "leds/led door",
+    file: "led door.zip",
+    image: "led.png"
+  },
+  {
+    name: "led bike 1",
+    path: "leds/led bike 1",
+    file: "led bike 1.zip",
+    image: "led.png"
+  },
+  {
+    name: "led bike 2",
+    path: "leds/led bike 2",
+    file: "led bike 2.zip",
+    image: "led.png"
+  },
+  {
+    name: "chassis_vlo spin pmesp",
+    path: "chassis_vlo/chassis_vlo spin pmesp",
+    file: "chassis_vlo spin pmesp.zip",
+    image: "chassis_vlo.png"
+  },
+  
 ];
 
 function main()
