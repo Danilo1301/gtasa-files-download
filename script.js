@@ -60,6 +60,12 @@ const files = [
     image: "led.png"
   },
   {
+    name: "led car 4",
+    path: "leds/led car 4",
+    file: "led car 4.zip",
+    image: "led.png"
+  },
+  {
     name: "led door",
     path: "leds/led door",
     file: "led door.zip",
