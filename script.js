@@ -84,6 +84,12 @@ const files = [
     image: "led.png"
   },
   {
+    name: "strobo 1",
+    path: "leds/strobo 1",
+    file: "strobo 1.zip",
+    image: "strobo.png"
+  },
+  {
     name: "chassis_vlo spin pmesp",
     path: "chassis_vlo/chassis_vlo spin pmesp",
     file: "chassis_vlo spin pmesp.zip",
