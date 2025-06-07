@@ -1,0 +1,12 @@
+pack 1
+giroflex 1
+giroflex 2
+giroflex 3
+giroflex 4
+giroflex 5
+giroflex 6
+giroflex 7
+giroflex 8
+giroflex 9
+led 1
+strobo 1

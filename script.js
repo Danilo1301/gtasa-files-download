@@ -1,126 +1,162 @@
-const files = [
-  {
-    name: "Lightbar 1 - white",
-    path: "lightbars/Lightbar 1 - white",
-    file: "Lightbar 1 - white.zip",
-    image: "lightbar.png"
-  },
-  {
-    name: "Lightbar 2 - red round",
-    path: "lightbars/Lightbar 2 - red round",
-    file: "Lightbar 2 - red round.zip",
-    image: "lightbar.png"
-  },
-  {
-    name: "Lightbar 3 - red white round",
-    path: "lightbars/Lightbar 3 - red white round",
-    file: "Lightbar 3 - red white round.zip",
-    image: "lightbar.png"
-  },
-  {
-    name: "Lightbar 4 - red white round",
-    path: "lightbars/Lightbar 4 - red white round",
-    file: "Lightbar 4 - red white round.zip",
-    image: "lightbar.png"
-  },
-  {
-    name: "Lightbar 5 - red blue",
-    path: "lightbars/Lightbar 5 - red blue",
-    file: "Lightbar 5 - red blue.zip",
-    image: "lightbar.png"
-  },
-  {
-    name: "Lightbar 6 - red",
-    path: "lightbars/Lightbar 6 - red",
-    file: "Lightbar 6 - red.zip",
-    image: "lightbar.png"
-  },
-  {
-    name: "Lightbar 7 - red",
-    path: "lightbars/Lightbar 7 - red",
-    file: "Lightbar 7 - red.zip",
-    image: "lightbar.png"
-  },
-  {
-    name: "led car 1",
-    path: "leds/led car 1",
-    file: "led car 1.zip",
-    image: "led.png"
-  },
-  {
-    name: "led car 2",
-    path: "leds/led car 2",
-    file: "led car 2.zip",
-    image: "led.png"
-  },
-  {
-    name: "led car 3",
-    path: "leds/led car 3",
-    file: "led car 3.zip",
-    image: "led.png"
-  },
-  {
-    name: "led car 4",
-    path: "leds/led car 4",
-    file: "led car 4.zip",
-    image: "led.png"
-  },
-  {
-    name: "led door",
-    path: "leds/led door",
-    file: "led door.zip",
-    image: "led.png"
-  },
-  {
-    name: "led bike 1",
-    path: "leds/led bike 1",
-    file: "led bike 1.zip",
-    image: "led.png"
-  },
-  {
-    name: "led bike 2",
-    path: "leds/led bike 2",
-    file: "led bike 2.zip",
-    image: "led.png"
-  },
-  {
-    name: "strobo 1",
-    path: "leds/strobo 1",
-    file: "strobo 1.zip",
-    image: "strobo.png"
-  },
-  {
-    name: "chassis_vlo spin pmesp",
-    path: "chassis_vlo/chassis_vlo spin pmesp",
-    file: "chassis_vlo spin pmesp.zip",
-    image: "chassis_vlo.png"
-  },
-  
-];
+console.log("script.js");
 
-function main()
+const allItems = {};
+
+async function main()
 {
-  console.log(files);
+  var items = await loadItemsTxt();
 
-  const template = $("#file-template");
-  console.log(template);
-  
-  for(const file of files)
+  //console.log(items);
+
+  for(const itemId of items)
   {
-    const fileForm = template.clone();
-    const fileSrc = `files/${file.path}/${file.file}`;
-    fileForm[0].style.display = "block"
-    fileForm[0].action = fileSrc;
-    
-    const titleEl = $(fileForm).find(".title");
-    titleEl.text(file.name)
+    //console.log(itemId);
 
-    const imageEl = $(fileForm).find(".image");
-    const imageSrc = `files/${file.path}/${file.image}`;
-    imageEl[0].src = imageSrc;
-  
-    $("#files").append(fileForm);
+    var template = await makeTemplate(itemId);
   }
 }
 
-$(document).ready(() => main());
+async function loadItemsTxt() {
+  try {
+    const response = await fetch('items/items.txt');
+    if (!response.ok) throw new Error("Erro ao carregar o arquivo");
+
+    const text = await response.text();
+    const lines = text.split("\n");
+
+    const items = lines.map(line => line.replaceAll("\r", ""));
+
+    //console.log(items);
+    return items;
+
+  } catch (err) {
+    alert(err);
+    return []; // retorna array vazio em caso de erro
+  }
+}
+
+async function makeTemplate(id)
+{
+  const data = await getData(id);
+  const title = getDataString(data, "title", id);
+  const size = getDataString(data, "size", "");
+  const adapted = getDataBool(data, "adapted", true);
+  let description = await getDescription(id);
+
+  console.log("descipt", description);
+
+  description += `<div>${adapted ? "Adapted" : "<b>Not adapted</b>"}</div>`
+
+  if(size.length > 0)
+  {
+    description += `<div>Size: ${size}</div>`;
+  }
+
+  const template = $("#file-template");
+  const clone = template.clone();
+  clone[0].style.display = "block"
+  $("#files").append(clone);
+
+  //
+
+  if(!window["clone"]) window["clone"] = clone;
+
+  clone.find("img")[0].src = `items/${id}/preview.png`;
+  clone.find(".card-title").text(title);
+  clone.find(".card-text").html(description);
+  clone.attr("action", `/items/${id}/download.zip`);
+
+  console.log(clone);
+
+  //
+
+  return clone;
+}
+
+function getDataString(data, key, defaultValue)
+{
+  if(!data[key]) return defaultValue;
+  return data[key];
+}
+
+function getDataBool(data, key, defaultValue)
+{
+  if(!data[key]) return defaultValue;
+  return data[key];
+}
+
+async function getData(id)
+{
+  var data = {};
+
+  try {
+    const response = await fetch('items/' + id + '/data.ini');
+    if (!response.ok) throw new Error("Erro ao carregar o arquivo");
+
+    const text = await response.text();
+
+    const lines = text.split("\n");
+
+    lines.forEach(line => {
+      const cleanLine = line.trim(); // remove \r, \n e espaços
+      let [key, value] = cleanLine.split(" = ");
+
+      if(value.includes("false")) value = false;
+      else if(value.includes("true")) value = true;
+
+      data[key] = value;
+    });
+    
+    return data;
+
+  } catch (err) {
+    console.error(err);
+    return data; // retorna array vazio em caso de erro
+  }
+}
+
+async function getDescription(id)
+{
+  var description = "";
+
+  try {
+    const response = await fetch('items/' + id + '/description.txt');
+    if (!response.ok) throw new Error("Erro ao carregar o arquivo");
+
+    const text = await response.text();
+    console.log(text);
+
+    description = parseTxtToHtml(text);
+
+    console.log(description);
+
+    return description;
+
+  } catch (err) {
+    //console.error(err);
+    return description; // retorna array vazio em caso de erro
+  }
+}
+
+main();
+
+function parseTxtToHtml(txt) {
+  const lines = txt.split("\n");
+  let html = "";
+
+  lines.forEach(line => {
+    const cleanLine = line.trim();
+
+    html += `<div>${cleanLine}</div>`;
+
+    // if (!cleanLine) return;
+
+    // const [key, value] = cleanLine.split(" = ");
+    // if (key && value) {
+    //   const formattedValue = value.replaceAll("\\n", "<br>");
+    //   html += `<b>${key}:</b> ${formattedValue}<br>`;
+    // }
+  });
+
+  return html;
+}

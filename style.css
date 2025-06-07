@@ -1,8 +1,10 @@
-.file .image {
+.item_image {
+  min-height: 100px;
+  min-width: 100px;
   width: 200px;
-  border-radius: 20px;
+  border-radius: 0px;
+  background-color: black;
 }
 
 .file button {
-  margin-bottom: 30px;
 }
